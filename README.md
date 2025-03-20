@@ -31,12 +31,17 @@ Un portfolio professionnel dynamique développé avec PHP, MySQL et Bootstrap. C
 git clone https://github.com/votre-username/tutolabpro.git
 ```
 
-2. Créez la base de données en utilisant le script SQL fourni :
+2. Installez les dépendances avec Composer :
+```bash
+composer install
+```
+
+3. Créez la base de données en utilisant le script SQL fourni :
 ```bash
 mysql -u votre_utilisateur -p votre_base_de_donnees < database.sql
 ```
 
-3. Configurez la connexion à la base de données dans `config.php` :
+4. Configurez la connexion à la base de données dans `config.php` :
 ```php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'votre_base_de_donnees');
@@ -44,7 +49,7 @@ define('DB_USER', 'votre_utilisateur');
 define('DB_PASS', 'votre_mot_de_passe');
 ```
 
-4. Configurez votre serveur web pour pointer vers le répertoire du projet
+5. Configurez votre serveur web pour pointer vers le répertoire du projet
 
 ## 📁 Structure du Projet
 
@@ -58,6 +63,9 @@ tutolabpro/
 │   ├── Database.php
 │   ├── functions.php
 │   └── handle_comment.php
+├── vendor/           # Dépendances Composer
+├── composer.json
+├── composer.lock
 ├── config.php
 ├── database.sql
 ├── index.php
@@ -164,4 +172,4 @@ VALUES ('votre_username', 'votre@email.com', '$2y$10$votre_hash_password');
 - Protection XSS avec htmlspecialchars()
 - Mots de passe hashés avec password_hash()
 - Sessions sécurisées
-- Validation des données côté serveur 
+- Validation des données côté serveur
