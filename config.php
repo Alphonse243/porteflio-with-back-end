@@ -4,9 +4,7 @@
     define("DB_PASSWORD", '');
     define("DB_HOST", 'localhost');
     define("DB_PORT", '3306');
-    define("SYS_URL", 'http://localhost/tutolabpro/');
+    define("SYS_URL", 'http://localhost/porteflie-with-back/porteflio-with-back-end/');
     define("DEBUGGING", false);
     define("DEFAULT_LOCALE", 'en_fr');
     define("LICENCE_KEY", 'Dontka243');
-    
-    ?>

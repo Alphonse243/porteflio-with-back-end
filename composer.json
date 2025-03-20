@@ -1,0 +1,19 @@
+{
+    "name": "tutolabpro/portfolio",
+    "description": "Portfolio professionnel avec back-end PHP",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TutoLabPro",
+            "email": "contact@tutolabpro.com"
+        }
+    ]
+}
