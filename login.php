@@ -67,31 +67,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <!-- Carte principale du formulaire de connexion -->
                 <div class="card">
+                    <!-- En-tête du formulaire -->
                     <div class="card-header">
                         <h3 class="text-center">Connexion</h3>
                     </div>
+                    <!-- Corps du formulaire -->
                     <div class="card-body">
+                        <!-- Affichage des messages d'erreur -->
                         <?php if ($error): ?>
                             <div class="alert alert-danger">
                                 <?php echo htmlspecialchars($error); ?>
                             </div>
                         <?php endif; ?>
                         
+                        <!-- Formulaire de connexion -->
                         <form method="POST" action="">
+                            <!-- Champ email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
+                            <!-- Champ mot de passe -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mot de passe</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
+                            <!-- Bouton de soumission -->
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Se connecter</button>
                             </div>
                         </form>
                         
+                        <!-- Lien de retour -->
                         <div class="text-center mt-3">
                             <a href="index.php">Retour à l'accueil</a>
                         </div>
@@ -105,4 +114,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>
