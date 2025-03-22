@@ -1,34 +1,3 @@
 # Composer
 /vendor/
 composer.lock
-
-# IDE / Éditeurs
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
-
-# Fichiers systèmes
-.DS_Store
-Thumbs.db
-
-# Fichiers d'environnement
-.env
-.env.local
-*.env.local
-
-# Fichiers de cache
-*.cache
-
-# Logs
-*.log
-/logs/*
-
-# Fichiers temporaires
-/tmp/
-*.tmp
-*.swp
-*.swo
-
-# Fichiers de configuration locaux
-config.local.php
