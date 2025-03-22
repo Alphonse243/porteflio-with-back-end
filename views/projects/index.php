@@ -23,33 +23,15 @@
                     <div class="section-inner shadow-sm rounded">
                         <h2 class="heading">Tous les projets</h2>
                         <div class="content">
-                            <div class="row">
-                            <?php foreach ($projects as $project): ?>
-                                <div class="col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <?php 
-                                        $imageUrl = $project['image_url'] ?? '';
-                                        $defaultImage = 'assets/images/default-project.jpg';
-                                        
-                                        // Vérifier si l'image existe physiquement
-                                        $fullPath = $_SERVER['DOCUMENT_ROOT'] . parse_url($imageUrl, PHP_URL_PATH);
-                                        if (empty($imageUrl) || !file_exists($fullPath)) {
-                                            $imageUrl = $defaultImage;
-                                        }
-                                        ?>
-                                        <img class="card-img-top" 
-                                             src="<?php echo $systemUrl . $imageUrl; ?>" 
-                                             alt="<?php echo sanitizeOutput($project['title']); ?>"
-                                             onerror="this.src='<?php echo $systemUrl . $defaultImage; ?>'">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?php echo sanitizeOutput($project['title']); ?></h5>
-                                            <p class="card-text"><?php echo nl2br(sanitizeOutput($project['description'])); ?></p>
-                                            <a href="project.php?url=<?php echo urlencode($project['project_url']); ?>" 
-                                               class="btn btn-primary">Voir plus</a>
-                                        </div>
-                                    </div>
+                            <div id="projects-container" class="row">
+                                <!-- Les projets seront chargés ici via Ajax -->
+                            </div>
+                            <div class="pagination-container text-center mt-4">
+                                <button id="load-more" class="btn btn-primary">Charger plus</button>
+                                <p id="loading" style="display: none;">Chargement...</p>
+                                <div id="error-message" class="alert alert-danger mt-3" style="display: none;">
+                                    Une erreur est survenue lors du chargement des projets.
                                 </div>
-                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -57,8 +39,8 @@
             </div>
         </div>
     </div>
-
     <?php require_once 'views/partials/footer.php'; ?>
     <?php require_once 'views/partials/footer_scripts.php'; ?>
+    <script src="assets/js/projects.js"></script>
 </body>
 </html>

@@ -1,19 +1,26 @@
 <?php
+try {
+    $host = 'localhost';
+    $dbname = 'tutolabpro';
+    $username = 'root';
+    $password = '';
+    $charset = 'utf8mb4';
 
-use Illuminate\Database\Capsule\Manager as Capsule;
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ];
 
-$capsule = new Capsule;
+    $pdo = new PDO($dsn, $username, $password, $options);
+    
+    // Tester la connexion
+    $pdo->query('SELECT 1');
+    
+    return $pdo;
 
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => DB_HOST,
-    'database'  => DB_NAME,
-    'username'  => DB_USER,
-    'password'  => DB_PASSWORD,
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
-
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
+} catch (PDOException $e) {
+    error_log('Database Connection Error: ' . $e->getMessage());
+    throw new PDOException('Database connection failed: ' . $e->getMessage());
+}
