@@ -10,14 +10,14 @@ $db = $database->getConnection();
 // Récupération des données
 $profile = getProfileData($db);
 $projects = getProjects($db);
-$skills = getSkills($db);
-$experience = getExperience($db);
 
 // Vérification du mode debug
 $debugMode = isDebugMode();
 $systemUrl = getSystemUrl();
 $locale = getDefaultLocale();
 
-// Inclure la vue
-require_once 'views/home/index.php';
+// Définir la variable pour les fonctionnalités GitHub
+$enableGitHub = isset($profile['github_username']) && !empty($profile['github_username']);
 
+// Inclure la vue
+require_once 'views/projects/index.php';

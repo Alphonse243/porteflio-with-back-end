@@ -1,40 +1,32 @@
 <?php
 namespace Views;
+require_once __DIR__ . '/../../config.php';
+
+// Define if GitHub features are enabled
+$enableGitHub = false; // Set to true when GitHub username is configured
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo substr($locale, 0, 2); ?>">
 <head>
-    <title><?php echo $debugMode ? '[DEBUG] ' : ''; ?>TutoLabPro - Portfolio</title>
+    <title><?php echo $debugMode ? '[DEBUG] ' : ''; ?>Portfolio</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo sanitizeOutput($profile['description'] ?? 'Portfolio développé avec TutoLabPro'); ?>">
-    <meta name="author" content="<?php echo sanitizeOutput($profile['name'] ?? 'TutoLabPro'); ?>">    
+    <meta name="description" content="<?php echo sanitizeOutput($profile['description'] ?? 'Portfolio'); ?>">
+    <meta name="author" content="<?php echo sanitizeOutput($profile['name'] ?? ''); ?>">    
     <link rel="shortcut icon" href="favicon.ico">  
     
-    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
-    
-    <!-- FontAwesome JS -->
-    <script defer src="<?php echo $systemUrl; ?>assets/fontawesome/js/all.js"></script>
-    
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="<?php echo $systemUrl; ?>assets/plugins/bootstrap/css/bootstrap.min.css">  
-    
-    <!-- github calendar css -->
-    <link rel="stylesheet" href="<?php echo $systemUrl; ?>assets/plugins/github-calendar/dist/github-calendar-responsive.css">
-    <!-- github activity css -->  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">  
-    <link rel="stylesheet" href="<?php echo $systemUrl; ?>assets/plugins/github-activity/src/github-activity.css">
-
-    <!-- Theme CSS -->  
-    <link id="theme-style" rel="stylesheet" href="<?php echo $systemUrl; ?>assets/css/styles.css">
-    
+    <!-- CSS et autres ressources -->
+    <?php require_once 'views/partials/header_resources.php'; ?>
 </head> 
 
 <body>
-    <?php include 'partials/header.php'; ?>
+    <!-- Navigation -->
+    <?php require_once 'views/partials/navigation.php'; ?>
+
+    <!-- Contenu de la page -->
+    <?php require_once 'views/partials/header.php'; ?>
     <div class="container sections-wrapper py-5">
         <div class="row">
             <div class="primary col-lg-8 col-12">
@@ -57,7 +49,16 @@ namespace Views;
                                 <?php if (!empty($project['image_url'])): ?>
                                 <div class="<?php echo $project['is_featured'] ? 'featured-image has-ribbon' : 'col-md-4 col-12'; ?>">
                                     <a href="project.php?url=<?php echo urlencode($project['project_url']); ?>">
-                                        <img class="img-fluid project-image rounded shadow-sm" src="<?php echo sanitizeOutput($project['image_url']); ?>" alt="<?php echo sanitizeOutput($project['title']); ?>" />
+                                        <?php 
+                                        $imageUrl = $project['image_url'] ?? '';
+                                        if (empty($imageUrl) || !file_exists($_SERVER['DOCUMENT_ROOT'] . parse_url($imageUrl, PHP_URL_PATH))) {
+                                            // Si l'image n'existe pas, utiliser une image placeholder
+                                            $imageUrl = "https://via.placeholder.com/800x600?text=Project+" . substr($project['title'], 0, 20);
+                                        }
+                                        ?>
+                                        <img class="img-fluid project-image rounded shadow-sm" 
+                                             src="<?php echo sanitizeOutput($imageUrl); ?>" 
+                                             alt="<?php echo sanitizeOutput($project['title']); ?>" />
                                     </a>
                                     <?php if ($project['is_featured']): ?>
                                     <div class="ribbon">
@@ -163,9 +164,24 @@ namespace Views;
                         </div><!--//content-->  
                     </div><!--//section-inner-->                 
                 </aside><!--//section-->
+
+                <!-- Optionally include GitHub sections -->
+                <?php if ($enableGitHub): ?>
+                    <div class="github-graph">
+                        <div class="loading">Chargement du calendrier GitHub...</div>
+                    </div>
+                    
+                    <div id="ghfeed" class="github-feed">
+                        <div class="loading">Chargement des activités GitHub...</div>
+                    </div>
+                <?php endif; ?>
             </div><!--//secondary-->    
         </div><!--//row-->
     </div><!--//masonry-->
-    <?php include 'partials/footer.php'; ?>
+    <!-- Footer -->
+    <?php require_once 'views/partials/footer.php'; ?>
+    
+    <!-- Scripts -->
+    <?php require_once 'views/partials/footer_scripts.php'; ?>
 </body>
 </html>

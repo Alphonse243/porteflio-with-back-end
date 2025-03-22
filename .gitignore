@@ -1,3 +1,7 @@
-# Composer
+# Dépendances Composer
 /vendor/
 composer.lock
+
+# Images des projets (sauf le fichier .gitkeep)
+/assets/images/projects/*
+!assets/images/projects/.gitkeep
