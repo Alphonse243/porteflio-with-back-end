@@ -1,6 +1,6 @@
-# TutoLabPro - Portfolio Dynamique
+# Portfolio avec Backend PHP
 
-Un portfolio professionnel dynamique développé avec PHP, MySQL et Bootstrap. Ce projet permet de créer un portfolio personnalisé avec une gestion dynamique du contenu via une base de données.
+Un portfolio professionnel dynamique avec backend PHP et base de données MySQL.
 
 ## 🚀 Fonctionnalités
 
@@ -23,33 +23,47 @@ Un portfolio professionnel dynamique développé avec PHP, MySQL et Bootstrap. C
 - MySQL 5.7 ou supérieur
 - Serveur web (Apache/Nginx)
 - Composer (optionnel)
+- Extension PHP GD
 
 ## 🛠️ Installation
 
-1. Clonez le dépôt :
+1. Cloner le projet
 ```bash
-git clone https://github.com/votre-username/tutolabpro.git
+git clone <votre-repo>
+cd porteflio-with-back-end
 ```
 
-2. Installez les dépendances avec Composer :
+2. Installer les dépendances via Composer
 ```bash
 composer install
 ```
 
-3. Créez la base de données en utilisant le script SQL fourni :
+3. Configurer la base de données
+- Créer une base de données MySQL nommée `tutolabpro`
+- Importer le fichier `database.sql`
 ```bash
-mysql -u votre_utilisateur -p votre_base_de_donnees < database.sql
+mysql -u root -p tutolabpro < database.sql
 ```
 
-4. Configurez la connexion à la base de données dans `config.php` :
-```php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'votre_base_de_donnees');
-define('DB_USER', 'votre_utilisateur');
-define('DB_PASS', 'votre_mot_de_passe');
+4. Configurer l'application
+- Copier le fichier `config.example.php` vers `config.php`
+- Modifier les paramètres de connexion dans `config.php`
+
+5. Créer les dossiers nécessaires et définir les permissions
+```bash
+mkdir -p assets/images/projects
+chmod 777 assets/images
 ```
 
-5. Configurez votre serveur web pour pointer vers le répertoire du projet
+6. Générer l'image par défaut
+```bash
+php create_default_image.php
+```
+
+7. Remplir la base de données avec des données de test
+```bash
+php database_seeder.php
+```
 
 ## 📁 Structure du Projet
 
@@ -119,6 +133,28 @@ Activez le mode debug dans `config.php` pour afficher les erreurs :
 ```php
 define('DEBUGGING', true);
 ```
+
+## 🖼️ Gestion des Images
+
+1. Créer le dossier des images de projets :
+```bash
+mkdir -p assets/images/projects
+```
+
+2. Générer l'image par défaut :
+```bash
+php create_default_image.php
+```
+
+3. Générer les images de démonstration des projets :
+```bash
+php create_project_images.php
+```
+
+Les images générées seront :
+- Une image par défaut pour les projets sans image
+- 10 images de démonstration pour les projets avec des couleurs différentes
+- Les dimensions des images sont 800x600 pixels
 
 ## 📝 Contribution
 
