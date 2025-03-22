@@ -209,7 +209,7 @@ $auth->login();
                             $('#success-message').show();
                             
                             setTimeout(function() {
-                                window.location.href = response.redirect || 'index.php';
+                                window.location.href = 'index.php';
                             }, 1000);
                         } else {
                             $('#error-message span').text(response.error || 'Une erreur est survenue');
