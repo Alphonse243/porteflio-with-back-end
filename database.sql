@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS projects (
     description TEXT,                         -- Description du projet
     image_url VARCHAR(255),                   -- URL de l'image du projet
     project_url VARCHAR(255),                 -- URL du projet
-    is_featured BOOLEAN DEFAULT FALSE,        -- Projet mis en avant
+    is_featured TINYINT(1) DEFAULT 0,         -- Changé de BOOLEAN à TINYINT(1)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Date de création
 );
 
@@ -94,4 +94,4 @@ INSERT INTO experience (title, company, location, start_date, end_date, descript
 
 -- Insertion d'un utilisateur de test
 INSERT INTO users (username, email, password) VALUES
-('test_user', 'test@example.com', SHA1('password123')); -- mot de passe: password123 
+('test_user', 'test@example.com', SHA1('password123')); -- mot de passe: password123
