@@ -51,13 +51,14 @@ $enableGitHub = false; // Set to true when GitHub username is configured
                                     <a href="project.php?url=<?php echo urlencode($project['project_url']); ?>">
                                         <?php 
                                         $imageUrl = $project['image_url'] ?? '';
-                                        if (empty($imageUrl) || !file_exists($_SERVER['DOCUMENT_ROOT'] . parse_url($imageUrl, PHP_URL_PATH))) {
-                                            // Si l'image n'existe pas, utiliser une image placeholder
-                                            $imageUrl = "https://via.placeholder.com/800x600?text=Project+" . substr($project['title'], 0, 20);
+                                        // Vérifier si l'image existe
+                                        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($imageUrl, '/'))) {
+                                            // Image par défaut locale
+                                            $imageUrl = "assets/images/default-project.jpg";
                                         }
                                         ?>
                                         <img class="img-fluid project-image rounded shadow-sm" 
-                                             src="<?php echo sanitizeOutput($imageUrl); ?>" 
+                                             src="<?php echo $systemUrl . $imageUrl; ?>" 
                                              alt="<?php echo sanitizeOutput($project['title']); ?>" />
                                     </a>
                                     <?php if ($project['is_featured']): ?>

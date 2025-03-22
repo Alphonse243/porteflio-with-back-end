@@ -45,14 +45,37 @@ try {
 
     // Seeding projects (10 projets)
     $stmt = $pdo->prepare("INSERT INTO projects (title, description, image_url, project_url, is_featured) VALUES (?, ?, ?, ?, ?)");
-    for ($i = 0; $i < 10; $i++) {
-        $stmt->execute([
-            $faker->catchPhrase,
-            $faker->paragraph,
-            'assets/images/projects/project-' . ($i + 1) . '.jpg',
-            $faker->url,
-            $faker->boolean() ? 1 : 0  // Convertit le booléen en 1 ou 0
-        ]);
+    
+    // Liste des images disponibles
+    $projectImages = [
+        'assets/images/projects/project-1.jpg',
+        'assets/images/projects/project-2.jpg',
+        'assets/images/projects/project-3.jpg',
+        'assets/images/projects/project-4.jpg',
+        'assets/images/projects/project-5.jpg',
+        'assets/images/projects/project-6.jpg',
+        'assets/images/projects/project-7.jpg',
+        'assets/images/projects/project-8.jpg',
+        'assets/images/projects/project-9.jpg',
+        'assets/images/projects/project-featured.jpg'
+    ];
+
+    // Insertion des projets avec les images existantes
+    $projectData = [
+        ['Launch - Template SaaS', 'Un template Bootstrap parfait pour les produits SaaS', $projectImages[9], 'https://example.com/launch', 1],
+        ['CoderPro - Template Startup', 'Template Bootstrap pour projets logiciels', $projectImages[0], 'https://example.com/coderpro', 0],
+        ['WebApp - Application Web', 'Application web moderne et responsive', $projectImages[1], 'https://example.com/webapp', 0],
+        ['MobileApp - App Mobile', 'Application mobile cross-platform', $projectImages[2], 'https://example.com/mobileapp', 0],
+        ['E-commerce Platform', 'Plateforme e-commerce complète', $projectImages[3], 'https://example.com/ecommerce', 0],
+        ['CMS System', 'Système de gestion de contenu', $projectImages[4], 'https://example.com/cms', 0],
+        ['Portfolio Theme', 'Thème portfolio professionnel', $projectImages[5], 'https://example.com/portfolio', 0],
+        ['Blog Platform', 'Plateforme de blog moderne', $projectImages[6], 'https://example.com/blog', 0],
+        ['Admin Dashboard', 'Interface d\'administration', $projectImages[7], 'https://example.com/admin', 0],
+        ['API Service', 'Service API RESTful', $projectImages[8], 'https://example.com/api', 0]
+    ];
+
+    foreach ($projectData as $project) {
+        $stmt->execute($project);
     }
 
     // Seeding skills (15 compétences)

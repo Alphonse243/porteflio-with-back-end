@@ -29,15 +29,18 @@
                                     <div class="card h-100">
                                         <?php 
                                         $imageUrl = $project['image_url'] ?? '';
-                                        if (empty($imageUrl) || !file_exists($_SERVER['DOCUMENT_ROOT'] . parse_url($imageUrl, PHP_URL_PATH))) {
-                                            // Image par défaut si l'image n'existe pas
-                                            $imageUrl = "https://via.placeholder.com/800x600?text=" . urlencode($project['title']);
+                                        $defaultImage = 'assets/images/default-project.jpg';
+                                        
+                                        // Vérifier si l'image existe physiquement
+                                        $fullPath = $_SERVER['DOCUMENT_ROOT'] . parse_url($imageUrl, PHP_URL_PATH);
+                                        if (empty($imageUrl) || !file_exists($fullPath)) {
+                                            $imageUrl = $defaultImage;
                                         }
                                         ?>
                                         <img class="card-img-top" 
-                                             src="<?php echo sanitizeOutput($imageUrl); ?>" 
+                                             src="<?php echo $systemUrl . $imageUrl; ?>" 
                                              alt="<?php echo sanitizeOutput($project['title']); ?>"
-                                             onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'">
+                                             onerror="this.src='<?php echo $systemUrl . $defaultImage; ?>'">
                                         <div class="card-body">
                                             <h5 class="card-title"><?php echo sanitizeOutput($project['title']); ?></h5>
                                             <p class="card-text"><?php echo nl2br(sanitizeOutput($project['description'])); ?></p>
