@@ -1,5 +1,5 @@
 {
-    "name": "tutolabpro/portfolio",
+    "name": "portfolio/backend",
     "description": "Portfolio professionnel avec back-end PHP",
     "type": "project",
     "require": {
@@ -8,10 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Core\\": "core/",
-            "Controllers\\": "controllers/",
-            "Models\\": "models/",
-            "Views\\": "views/"
+            "App\\": "src/"
         }
     },
     "authors": [

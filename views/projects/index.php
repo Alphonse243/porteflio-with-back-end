@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../../vendor/autoload.php';
+use App\Helper\OutputHelper;
+?>
 <!DOCTYPE html>
 <html lang="<?php echo substr($locale, 0, 2); ?>">
 <head>
@@ -7,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Projets du portfolio">
-    <meta name="author" content="<?php echo sanitizeOutput($profile['name'] ?? ''); ?>">    
+    <meta name="author" content="<?php echo OutputHelper::sanitize($profile['name'] ?? ''); ?>">    
     <link rel="shortcut icon" href="favicon.ico">  
     
     <?php require_once 'views/partials/header_resources.php'; ?>
